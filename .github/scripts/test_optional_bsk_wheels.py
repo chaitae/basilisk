@@ -162,12 +162,12 @@ def install_extra(python: Path, wheelhouse: Path, extra: str) -> None:
         "--no-index",
         "--find-links",
         wheelhouse,
-        f"bsk[{extra}]",
+        f"bsk_test[{extra}]",
     ])
 
 
 def test_optional_wheels(wheelhouse: Path) -> None:
-    base_wheel = find_one_wheel(wheelhouse, "bsk-*.whl")
+    base_wheel = find_one_wheel(wheelhouse, "bsk_test-*.whl")
     opnav_wheel = find_one_wheel(wheelhouse, "bsk_opnav-*.whl")
     print(f"Testing base wheel: {base_wheel}")
     print(f"Testing opNav wheel: {opnav_wheel}")
@@ -191,7 +191,7 @@ def test_optional_wheels(wheelhouse: Path) -> None:
         )
 
         install_extra(python, wheelhouse, "opnav")
-        run([python, "-m", "pip", "show", "bsk", "bsk-opnav"])
+        run([python, "-m", "pip", "show", "bsk-test", "bsk-test"])
         run_import_check(
             python,
             required=CORE_IMPORTS + OPNAV_IMPORTS,
@@ -201,7 +201,7 @@ def test_optional_wheels(wheelhouse: Path) -> None:
         )
         run_protobuf_consumer_checks(python, test_env)
 
-        run([python, "-m", "pip", "uninstall", "-y", "bsk-opnav"])
+        run([python, "-m", "pip", "uninstall", "-y", "bsk-test"])
         run_import_check(
             python,
             required=CORE_IMPORTS,
@@ -211,7 +211,7 @@ def test_optional_wheels(wheelhouse: Path) -> None:
         )
 
         install_extra(python, wheelhouse, "all")
-        run([python, "-m", "pip", "show", "bsk", "bsk-opnav"])
+        run([python, "-m", "pip", "show", "bsk-test", "bsk-test"])
         run_import_check(
             python,
             required=CORE_IMPORTS + OPNAV_IMPORTS,

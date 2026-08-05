@@ -38,7 +38,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_VERSION_FILE = REPO_ROOT / "docs/source/bskVersion.txt"
-BASE_DISTRIBUTION = "bsk"
+BASE_DISTRIBUTION = "bsk_test"
 BUILD_INFO_DATA_PATH = "Basilisk/_buildInfoData.py"
 BUILD_FEATURE_ENTRY_POINT_GROUP = "basilisk.build_features"
 NATIVE_PAYLOAD_SUFFIXES = (".a", ".dll", ".dylib", ".lib", ".pyd", ".so")

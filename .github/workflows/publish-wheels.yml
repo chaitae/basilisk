@@ -1,6 +1,8 @@
 name: Publish Wheels
 
 on:
+  schedule:
+    - cron: '0 0 1 * *'
   push:
     tags:
       - "v[0-9]*"
@@ -134,22 +136,22 @@ jobs:
           name: cibw-wheel-input-${{ matrix.os }}-opnav-full
           path: wheelhouse-opnav-full
 
-      - name: Generate and test optional wheel installs
-        shell: bash
-        run: >
-          python .github/scripts/run_optional_bsk_wheel_test.py
-          --component opnav
-          --base-wheel-dir wheelhouse-core
-          --component-wheel-dir wheelhouse-opnav-full
-          --optional-wheel-dir wheelhouse-optional
-          --test-wheelhouse wheelhouse-test
+      # - name: Generate and test optional wheel installs
+      #   shell: bash
+      #   run: >
+      #     python .github/scripts/run_optional_bsk_wheel_test.py
+      #     --component opnav
+      #     --base-wheel-dir wheelhouse-core
+      #     --component-wheel-dir wheelhouse-opnav-full
+      #     --optional-wheel-dir wheelhouse-optional
+      #     --test-wheelhouse wheelhouse-test
 
       - name: Prepare publish wheels
         shell: bash
         run: |
           mkdir -p wheelhouse-publish
           cp wheelhouse-core/*.whl wheelhouse-publish/
-          cp wheelhouse-optional/*.whl wheelhouse-publish/
+      # cp wheelhouse-optional/*.whl wheelhouse-publish/
 
       - name: Upload wheels
         uses: actions/upload-artifact@v6

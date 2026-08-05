@@ -66,8 +66,8 @@ def run_optional_wheel_test(
     test_wheelhouse: Path,
     version_file: Path,
 ) -> None:
-    base_wheel = find_one_wheel(base_wheel_dir, "bsk-*.whl")
-    component_wheel = find_one_wheel(component_wheel_dir, "bsk-*.whl")
+    base_wheel = find_one_wheel(base_wheel_dir, "bsk_test-*.whl")
+    component_wheel = find_one_wheel(component_wheel_dir, "bsk_test-*.whl")
     print(f"Base wheel input: {base_wheel}", flush=True)
     print(f"Component wheel input: {component_wheel}", flush=True)
 
